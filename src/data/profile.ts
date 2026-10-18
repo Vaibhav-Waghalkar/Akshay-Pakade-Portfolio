@@ -21,6 +21,7 @@ export interface ProjectItem {
   stack: string[]
   repoUrl?: string
   liveUrl?: string
+  isInfrastructure?: boolean
 }
 
 export interface SkillCategory {
@@ -42,13 +43,21 @@ export interface ProfileData {
   heroTags: string[]
   socialLinks: {
     linkedin: string
-    emailPlaceholder: string
-    contactEndpoint?: string
+    phone: string // Rendered as tel: link with copy-to-clipboard button
+    email: string // Configured as empty string. Render row and mailto only when non-empty.
+    contactEndpoint?: string // Configurable form endpoint (e.g. Formspree). Form rendered only if non-empty.
   }
   about: {
     intro: string[]
     focusBlocks: FocusBlock[]
     quote: string
+    atAGlance: {
+      location: string
+      currentRole: string
+      experience: string
+      focus: string
+      education: string
+    }
   }
   experiences: ExperienceItem[]
   projects: ProjectItem[]
@@ -70,9 +79,11 @@ export const profileData: ProfileData = {
   heroTags: ['Azure', 'Kubernetes', 'Terraform', 'LangChain', 'MCP', 'FastAPI'],
   socialLinks: {
     linkedin: 'https://www.linkedin.com/in/akshay-pakade-8a34b0349/',
-    // Email field read from config/data, placeholder as requested - no invented addresses
-    emailPlaceholder: 'akshay.pakade@example.com',
-    // Configurable contact form endpoint (e.g., Formspree). Leave empty or configure your endpoint.
+    phone: '+91 91728 15355',
+    // Kept as empty string until the owner adds their real email.
+    // Form and mailto rows render conditionally only when this is non-empty.
+    email: '',
+    // Form endpoint (e.g. Formspree). Leave empty to show clean phone and LinkedIn contact rows.
     contactEndpoint: '',
   },
   about: {
@@ -80,6 +91,13 @@ export const profileData: ProfileData = {
       'Technology professional with 6.5+ years of IT experience across Cloud Engineering, DevOps, Infrastructure Automation and cloud-native platforms.',
       'Expanding into Agentic AI, Generative AI, LLMOps and Forward Deployed Engineering to connect advanced technology with real-world business solutions.',
     ],
+    atAGlance: {
+      location: 'Pune District, Maharashtra',
+      currentRole: 'Senior DevOps Engineer, Wipro',
+      experience: '6.5+ years',
+      focus: 'Agentic AI, FDE, Cloud and Platform Engineering',
+      education: 'BE Electrical Engineering, RTMNU',
+    },
     focusBlocks: [
       {
         id: 'ai-engineering',
@@ -114,7 +132,7 @@ export const profileData: ProfileData = {
       role: 'Senior DevOps Engineer',
       company: 'Wipro',
       employmentType: 'Full-time',
-      period: 'Nov 2025 - Present',
+      period: 'Nov 2025 to Present',
       location: 'Pune District, Maharashtra',
       workplaceType: 'Hybrid',
       description:
@@ -138,7 +156,7 @@ export const profileData: ProfileData = {
       role: 'Senior DevOps Engineer',
       company: 'Reliance Property Project Limited',
       employmentType: 'Full-time',
-      period: 'Jan 2023 - Nov 2025',
+      period: 'Jan 2023 to Nov 2025',
       duration: '2 yrs 11 mos',
       location: 'Mumbai, Maharashtra',
       workplaceType: 'On-site',
@@ -162,7 +180,7 @@ export const profileData: ProfileData = {
       role: 'DevOps Engineer',
       company: 'V5 Global',
       employmentType: 'Full-time',
-      period: 'Sep 2022 - Jan 2023',
+      period: 'Sep 2022 to Jan 2023',
       duration: '5 mos',
       location: 'Pune District, Maharashtra',
       workplaceType: 'On-site',
@@ -183,7 +201,7 @@ export const profileData: ProfileData = {
       role: 'Cloud Administrator',
       company: 'Quess Corp Limited',
       employmentType: 'Full-time',
-      period: 'Apr 2020 - Aug 2022',
+      period: 'Apr 2020 to Aug 2022',
       duration: '2 yrs 5 mos',
       location: 'Nagpur, Maharashtra',
       workplaceType: 'Hybrid',
@@ -202,10 +220,11 @@ export const profileData: ProfileData = {
     },
   ],
   projects: [
+    // --- 4 Agentic AI Projects ---
     {
       id: 'k8s-self-healing',
       title: 'AI-Powered Self-Healing Kubernetes Infrastructure',
-      period: 'Nov 2025 - Present',
+      period: 'Nov 2025 to Present',
       association: 'Associated with Wipro',
       summary:
         'AI-driven infrastructure assistant that helps engineers investigate Kubernetes issues, analyze cluster health and propose remediation through an agentic workflow.',
@@ -214,7 +233,7 @@ export const profileData: ProfileData = {
         'Secure Kubernetes API and kubectl integration through a dedicated Model Context Protocol (MCP) server.',
         'Human-in-the-loop approval before destructive cluster operations.',
         'FastAPI async orchestration with authenticated requests.',
-        'Conversational interface and auditability for operational oversight.',
+        'Conversational interface and auditability.',
       ],
       stack: [
         'Python',
@@ -226,22 +245,23 @@ export const profileData: ProfileData = {
         'kubectl',
         'Chainlit',
       ],
-      // repoUrl: 'https://github.com/...', // Left undefined until official repository is public
-      // liveUrl: 'https://...',
+      // repoUrl: '',
+      // liveUrl: '',
     },
     {
       id: 'agentic-ai-platform',
       title: 'Enterprise-Grade Agentic AI Platform',
-      period: 'Dec 2025 - Aug 2026',
+      period: 'Dec 2025 to Aug 2026',
       association: 'Associated with Wipro',
       summary:
         'End-to-end architecture for production-oriented AI apps combining agents, APIs, microservices, streaming data and cloud-native deployment.',
       bullets: [
         'Integrate LLMs, LangGraph and MCP for AI copilots and task-oriented agents.',
-        'FastAPI services and modular components for low latency execution.',
-        'Event-driven processing with Kafka for decoupling ingestion pipelines.',
-        'Vector databases and AI orchestration for reliable knowledge retrieval.',
-        'Kubernetes and GitOps for scalable delivery, observability and operational automation.',
+        'FastAPI services and modular components.',
+        'Event-driven processing with Kafka.',
+        'Vector databases and AI orchestration.',
+        'Kubernetes and GitOps for scalable delivery.',
+        'AI-assisted development, observability and operational automation.',
       ],
       stack: [
         'Python',
@@ -262,12 +282,12 @@ export const profileData: ProfileData = {
       summary:
         'Event-driven AI solution that automates baggage recovery by matching passenger-submitted lost-item reports with item descriptions.',
       bullets: [
-        'Streamlit passenger report interface for fast incident submission.',
-        'FastAPI gateway for handling async intake requests.',
-        'Apache Kafka for event streaming and decoupled processing between intake and matching.',
+        'Streamlit passenger report interface.',
+        'FastAPI gateway for async requests.',
+        'Apache Kafka for event streaming and decoupled processing.',
         'Python background workers for item extraction and AI matching.',
-        'LLM-based attribute parsing and matching algorithm.',
-        'PostgreSQL persistence and async status updates across lifecycle.',
+        'LLM-based attribute parsing and matching.',
+        'PostgreSQL persistence and async status updates.',
       ],
       stack: [
         'Python',
@@ -287,11 +307,11 @@ export const profileData: ProfileData = {
       summary:
         'Scalable, secure AI chat platform that retrieves from private knowledge sources and generates context-grounded LLM responses.',
       bullets: [
-        'FastAPI gateway for requests, authentication and API access control.',
+        'FastAPI gateway for requests, authentication and API access.',
         'Async ingestion and embedding workflows with Celery workers.',
-        'Semantic search and vector retrieval using Qdrant vector database.',
-        'PostgreSQL for application metadata, chat history and sessions.',
-        'Tenant isolation for customer data and segregated retrieval contexts.',
+        'Semantic search and vector retrieval using Qdrant.',
+        'PostgreSQL for app data and sessions.',
+        'Tenant isolation for customer data and retrieval contexts.',
       ],
       stack: [
         'Python',
@@ -303,6 +323,60 @@ export const profileData: ProfileData = {
         'Celery',
         'Embeddings',
       ],
+      // repoUrl: '',
+      // liveUrl: '',
+    },
+
+    // --- 3 Infrastructure Work Projects (summarizing role responsibilities for owner customization) ---
+    // Note: These cards summarize core role responsibilities across his career so the owner can add specifics or links as needed.
+    {
+      id: 'terraform-modules-tfsec',
+      title: 'Reusable Terraform Modules with TFSec Scanning',
+      association: 'Reliance Property Project Limited & V5 Global',
+      isInfrastructure: true,
+      summary:
+        'Automated Azure infrastructure provisioning with reusable IaC modules and integrated security scanning.',
+      bullets: [
+        'Automated Azure infrastructure provisioning with Terraform and reusable IaC modules.',
+        'Implemented TFSec for proactive security scanning of Terraform repositories.',
+        'Maintained structured Git branching strategies in Azure Repos.',
+        'Improved provisioning workflows through Git-based version control and security scanning.',
+      ],
+      stack: ['Terraform', 'TFSec', 'Azure', 'Git', 'Azure Repos'],
+      // repoUrl: '',
+      // liveUrl: '',
+    },
+    {
+      id: 'azure-devops-cicd-pipelines',
+      title: 'Azure DevOps CI/CD Pipelines',
+      association: 'Reliance Property Project Limited & V5 Global',
+      isInfrastructure: true,
+      summary:
+        'Engineered CI/CD workflows and deployment automation to streamline operations across cloud environments.',
+      bullets: [
+        'Developed and maintained CI/CD pipelines using Azure DevOps.',
+        'Worked with Terraform, Git and Azure YAML pipelines.',
+        'Streamlined infrastructure operations through scripting and deployment automation.',
+        'Supported Kubernetes workloads, Docker containers and Helm deployments.',
+      ],
+      stack: ['Azure DevOps', 'YAML Pipelines', 'Docker', 'Helm', 'CI/CD'],
+      // repoUrl: '',
+      // liveUrl: '',
+    },
+    {
+      id: 'aks-gitops-observability',
+      title: 'AKS GitOps Delivery and Observability',
+      association: 'Wipro',
+      isInfrastructure: true,
+      summary:
+        'Kubernetes/AKS orchestration, GitOps delivery pipelines, and production observability architecture.',
+      bullets: [
+        'Kubernetes/AKS orchestration, Helm deployments and GitOps with Argo CD.',
+        'CI/CD pipeline engineering and release automation with Azure DevOps and GitHub Actions.',
+        'Observability, monitoring, SRE practices and production reliability.',
+        'Platform monitoring with Prometheus, Grafana, Azure Monitor and Log Analytics.',
+      ],
+      stack: ['AKS', 'Helm', 'Argo CD', 'Prometheus', 'Grafana', 'GitHub Actions'],
       // repoUrl: '',
       // liveUrl: '',
     },
@@ -380,6 +454,6 @@ export const profileData: ProfileData = {
     field: 'Electrical Engineering',
     institution: 'Rashtrasant Tukadoji Maharaj Nagpur University (RTMNU)',
     certificationNote:
-      'AWS Certified Cloud Practitioner Training (Completed comprehensive cloud architecture and security training)',
+      'AWS Certified Cloud Practitioner Training (listed as training on LinkedIn, do not claim as a passed certification)',
   },
 }

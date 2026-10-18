@@ -41,10 +41,10 @@ async function generateResumePdf() {
       format: 'A4',
       printBackground: true,
       margin: {
-        top: '12mm',
-        right: '15mm',
-        bottom: '12mm',
-        left: '15mm',
+        top: '8mm',
+        right: '12mm',
+        bottom: '8mm',
+        left: '12mm',
       },
     })
 

@@ -5,7 +5,7 @@ import { ArrowLeft, Scale } from 'lucide-react'
 export const TermsPage: React.FC = () => {
   return (
     <div className="min-h-screen py-16 px-4 sm:px-6">
-      <div className="max-w-3xl mx-auto space-y-8">
+      <div className="content-container space-y-8">
         <Link
           to="/"
           className="inline-flex items-center gap-1.5 text-xs font-mono text-[var(--accent)] hover:underline"
@@ -19,7 +19,7 @@ export const TermsPage: React.FC = () => {
             <Scale className="w-4 h-4" />
             <span>TERMS OF SERVICE</span>
           </div>
-          <h1 className="text-3xl font-bold tracking-tight text-[var(--text-primary)]">
+          <h1 className="fluid-h2 font-bold tracking-tight text-[var(--text-primary)]">
             Terms of Service
           </h1>
           <p className="text-xs font-mono text-[var(--text-muted)]">
@@ -27,11 +27,11 @@ export const TermsPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="crystal-card p-8 rounded-[3px] space-y-6 text-sm text-[var(--text-secondary)] leading-relaxed">
+        <div className="crystal-card p-8 rounded-[3px] space-y-6 text-sm text-[var(--text-secondary)] leading-relaxed max-w-[85ch]">
           <section className="space-y-2">
-            <h2 className="text-base font-bold text-[var(--text-primary)]">1. Purpose</h2>
+            <h2 className="text-base font-bold text-[var(--text-primary)]">1. Purpose & Scope</h2>
             <p>
-              This website serves as the professional portfolio of Akshay Pakade for presenting technical background, work experience, and engineering projects in DevOps and Agentic AI.
+              This website serves as the professional portfolio of Akshay Pakade for presenting technical background, work experience, and engineering projects in Cloud Engineering, DevOps, and Agentic AI.
             </p>
           </section>
 
@@ -43,9 +43,9 @@ export const TermsPage: React.FC = () => {
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-base font-bold text-[var(--text-primary)]">3. Inquiries</h2>
+            <h2 className="text-base font-bold text-[var(--text-primary)]">3. Inquiries & Professional Contact</h2>
             <p>
-              For recruitment, professional contracting, or engineering discussions, inquiries may be routed through{' '}
+              For recruitment, professional contracting, or engineering discussions, inquiries may be routed through the telephone line (+91 91728 15355) or via{' '}
               <a
                 href="https://www.linkedin.com/in/akshay-pakade-8a34b0349/"
                 target="_blank"

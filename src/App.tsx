@@ -19,8 +19,19 @@ export function App() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      {/* Accessible Skip to Content Link */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--accent)] focus:text-white focus:font-mono focus:text-xs focus:rounded focus:outline-none"
+      >
+        Skip to main content
+      </a>
+
+      {/* Navbar rendered on all pages except print-focused resume */}
       {!isResume && <Navbar />}
-      <main className="flex-1">
+
+      {/* Main Landmark with semantic ID */}
+      <main id="main-content" className="flex-1">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/resume" element={<ResumePage />} />
@@ -29,6 +40,8 @@ export function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
+
+      {/* Footer rendered on all pages except print-focused resume */}
       {!isResume && <Footer />}
     </div>
   )

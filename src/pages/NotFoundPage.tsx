@@ -1,29 +1,49 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Compass } from 'lucide-react'
+import { Compass, FileText, FolderGit2, Home } from 'lucide-react'
 
 export const NotFoundPage: React.FC = () => {
   return (
-    <div className="min-h-[70vh] flex items-center justify-center py-20 px-4 sm:px-6">
+    <div className="min-h-[75vh] flex items-center justify-center py-20 px-4 sm:px-6">
       <div className="max-w-md w-full text-center space-y-6">
         <div className="w-16 h-16 mx-auto rounded-[3px] border border-[var(--border-crystal)] bg-[var(--bg-card)] flex items-center justify-center text-[var(--accent)]">
-          <Compass className="w-8 h-8 animate-pulse" />
+          <Compass className="w-8 h-8" />
         </div>
 
         <div className="space-y-2">
           <div className="text-xs font-mono text-[var(--accent)] tracking-wider">ERROR 404</div>
-          <h1 className="text-3xl font-bold tracking-tight text-[var(--text-primary)]">
+          <h1 className="fluid-h2 font-bold tracking-tight text-[var(--text-primary)]">
             Node Not Found
           </h1>
           <p className="text-sm text-[var(--text-secondary)] font-mono">
-            The requested route or resource does not exist in this cluster.
+            The requested route does not exist. Explore key sections:
           </p>
         </div>
 
-        <div>
-          <Link to="/" className="btn-primary text-xs font-mono">
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Return to Portfolio</span>
+        {/* Structured 404 Suggestions */}
+        <div className="pt-2 grid grid-cols-1 gap-2.5 text-xs font-mono">
+          <Link
+            to="/"
+            className="p-3 rounded-[3px] border border-[var(--border-crystal)] bg-[var(--bg-surface)] hover:border-[var(--accent)] text-[var(--text-primary)] flex items-center justify-center gap-2 transition-all"
+          >
+            <Home className="w-3.5 h-3.5 text-[var(--accent)]" />
+            <span>Return to Portfolio Home</span>
+          </Link>
+
+          <a
+            href="/#projects"
+            className="p-3 rounded-[3px] border border-[var(--border-crystal)] bg-[var(--bg-surface)] hover:border-[var(--accent)] text-[var(--text-primary)] flex items-center justify-center gap-2 transition-all"
+          >
+            <FolderGit2 className="w-3.5 h-3.5 text-[var(--accent)]" />
+            <span>View Featured Projects</span>
+          </a>
+
+          <Link
+            to="/resume"
+            className="p-3 rounded-[3px] border border-[var(--border-crystal)] bg-[var(--bg-surface)] hover:border-[var(--accent)] text-[var(--text-primary)] flex items-center justify-center gap-2 transition-all"
+          >
+            <FileText className="w-3.5 h-3.5 text-[var(--accent)]" />
+            <span>View ATS Resume Page</span>
           </Link>
         </div>
       </div>
