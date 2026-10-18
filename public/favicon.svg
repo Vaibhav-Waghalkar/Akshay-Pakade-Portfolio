@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="crystalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0b0d" />
+      <stop offset="100%" stop-color="#181c24" />
+    </linearGradient>
+  </defs>
+  <!-- Faceted Crystal Border -->
+  <polygon points="12,2 52,2 62,12 62,52 52,62 12,62 2,52 2,12" fill="url(#bgGrad)" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.8" />
+  
+  <!-- Facet internal accents -->
+  <line x1="12" y1="2" x2="22" y2="20" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.4" />
+  <line x1="52" y1="2" x2="42" y2="20" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.4" />
+  <line x1="2" y1="12" x2="20" y2="22" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.4" />
+  <line x1="62" y1="12" x2="44" y2="22" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.4" />
+  
+  <!-- Monogram AP -->
+  <text x="32" y="41" font-family="'JetBrains Mono', 'Geist Mono', monospace" font-size="24" font-weight="800" fill="url(#crystalGrad)" text-anchor="middle" letter-spacing="-1">AP</text>
+</svg>
