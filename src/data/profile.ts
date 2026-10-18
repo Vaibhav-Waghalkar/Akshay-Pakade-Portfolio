@@ -46,6 +46,7 @@ export interface ProfileData {
     phone: string // Rendered as tel: link with copy-to-clipboard button
     email: string // Configured as empty string. Render row and mailto only when non-empty.
     contactEndpoint?: string // Configurable form endpoint (e.g. Formspree). Form rendered only if non-empty.
+    enableWhatsAppFallback?: boolean // If true and endpoint is empty, contact form opens WhatsApp prefilled message
   }
   about: {
     intro: string[]
@@ -83,8 +84,9 @@ export const profileData: ProfileData = {
     // Kept as empty string until the owner adds their real email.
     // Form and mailto rows render conditionally only when this is non-empty.
     email: '',
-    // Form endpoint (e.g. Formspree). Leave empty to show clean phone and LinkedIn contact rows.
+    // Form endpoint (e.g. Formspree). Leave empty to use WhatsApp fallback.
     contactEndpoint: '',
+    enableWhatsAppFallback: true,
   },
   about: {
     intro: [

@@ -1,23 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
     <linearGradient id="crystalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0284c7" />
-      <stop offset="100%" stop-color="#38bdf8" />
+      <stop offset="0%" stop-color="#3DD6C3" />
+      <stop offset="50%" stop-color="#5AB0FF" />
+      <stop offset="100%" stop-color="#F6B945" />
     </linearGradient>
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0a0b0d" />
-      <stop offset="100%" stop-color="#181c24" />
+      <stop offset="0%" stop-color="#0C0C0E" />
+      <stop offset="100%" stop-color="#18181C" />
     </linearGradient>
   </defs>
-  <!-- Faceted Crystal Border -->
-  <polygon points="12,2 52,2 62,12 62,52 52,62 12,62 2,52 2,12" fill="url(#bgGrad)" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.8" />
+  <!-- Faceted Crystal Border in Palette -->
+  <polygon points="12,2 52,2 62,12 62,52 52,62 12,62 2,52 2,12" fill="url(#bgGrad)" stroke="#3DD6C3" stroke-width="2" stroke-opacity="0.85" />
   
-  <!-- Facet internal accents -->
-  <line x1="12" y1="2" x2="22" y2="20" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.4" />
-  <line x1="52" y1="2" x2="42" y2="20" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.4" />
-  <line x1="2" y1="12" x2="20" y2="22" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.4" />
-  <line x1="62" y1="12" x2="44" y2="22" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.4" />
+  <!-- Facet internal accents in sky and amber -->
+  <line x1="12" y1="2" x2="22" y2="20" stroke="#5AB0FF" stroke-width="1" stroke-opacity="0.45" />
+  <line x1="52" y1="2" x2="42" y2="20" stroke="#F6B945" stroke-width="1" stroke-opacity="0.45" />
+  <line x1="2" y1="12" x2="20" y2="22" stroke="#5AB0FF" stroke-width="1" stroke-opacity="0.45" />
+  <line x1="62" y1="12" x2="44" y2="22" stroke="#FF7A66" stroke-width="1" stroke-opacity="0.45" />
   
   <!-- Monogram AP -->
-  <text x="32" y="41" font-family="'JetBrains Mono', 'Geist Mono', monospace" font-size="24" font-weight="800" fill="url(#crystalGrad)" text-anchor="middle" letter-spacing="-1">AP</text>
+  <text x="32" y="41" font-family="'JetBrains Mono', monospace" font-size="24" font-weight="800" fill="url(#crystalGrad)" text-anchor="middle" letter-spacing="-1">AP</text>
 </svg>

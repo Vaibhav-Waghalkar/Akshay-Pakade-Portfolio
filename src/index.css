@@ -1,53 +1,59 @@
-@import "@fontsource/space-grotesk/400.css";
-@import "@fontsource/space-grotesk/500.css";
-@import "@fontsource/space-grotesk/600.css";
-@import "@fontsource/space-grotesk/700.css";
+@import "@fontsource/bricolage-grotesque/400.css";
+@import "@fontsource/bricolage-grotesque/600.css";
+@import "@fontsource/bricolage-grotesque/700.css";
+@import "@fontsource/bricolage-grotesque/800.css";
+@import "@fontsource/instrument-serif/400-italic.css";
+@import "@fontsource/dm-sans/400.css";
+@import "@fontsource/dm-sans/500.css";
+@import "@fontsource/dm-sans/600.css";
 @import "@fontsource/jetbrains-mono/400.css";
 @import "@fontsource/jetbrains-mono/500.css";
-@import "@fontsource/jetbrains-mono/600.css";
 
 @import "tailwindcss";
 
 @layer base {
   :root {
-    --bg-primary: #f7f8fa;
-    --bg-surface: rgba(255, 255, 255, 0.76);
-    --bg-surface-elevated: rgba(255, 255, 255, 0.94);
-    --bg-card: rgba(255, 255, 255, 0.7);
-    --bg-alt: #f1f3f6;
-    --border-crystal: rgba(15, 23, 42, 0.12);
+    /* Multi-Colour Palette Tokens */
+    --color-teal: #3DD6C3;
+    --color-sky: #5AB0FF;
+    --color-amber: #F6B945;
+    --color-coral: #FF7A66;
+
+    /* Light Theme (Warm Paper) */
+    --bg-primary: #F6F3EE;
+    --bg-surface: #FFFFFF;
+    --bg-surface-elevated: #FFFFFF;
+    --bg-card: rgba(255, 255, 255, 0.85);
+    --bg-alt: #EFEBE4;
+    --border-crystal: rgba(0, 0, 0, 0.08);
     --border-crystal-highlight: rgba(255, 255, 255, 0.95);
-    --border-line: rgba(15, 23, 42, 0.08);
-    --text-primary: #0a0b0d;
-    --text-secondary: #374151;
-    --text-muted: #525f70;
-    --accent: #0284c7;
-    --accent-glow: rgba(2, 132, 199, 0.12);
-    --accent-steel: #0369a1;
-    --nav-bg: rgba(247, 248, 250, 0.88);
-    --refract-from: rgba(2, 132, 199, 0.4);
-    --refract-to: rgba(15, 23, 42, 0.04);
-    --grid-line: rgba(15, 23, 42, 0.05);
+    --border-line: rgba(0, 0, 0, 0.08);
+    --text-primary: #151412;
+    --text-secondary: #403E39;
+    --text-muted: #6B6862;
+    --nav-bg: rgba(246, 243, 238, 0.88);
+    --grid-line: rgba(0, 0, 0, 0.05);
+
+    /* Gradients */
+    --grad-teal-sky: linear-gradient(135deg, #3DD6C3 0%, #5AB0FF 100%);
+    --grad-amber-coral: linear-gradient(135deg, #F6B945 0%, #FF7A66 100%);
+    --grad-tricolor: linear-gradient(135deg, #5AB0FF 0%, #3DD6C3 50%, #F6B945 100%);
   }
 
   .dark {
-    --bg-primary: #0a0b0d;
-    --bg-surface: rgba(16, 18, 22, 0.75);
-    --bg-surface-elevated: rgba(22, 26, 32, 0.9);
-    --bg-card: rgba(18, 21, 26, 0.62);
-    --bg-alt: #0e1014;
-    --border-crystal: rgba(255, 255, 255, 0.1);
-    --border-crystal-highlight: rgba(255, 255, 255, 0.22);
-    --border-line: rgba(255, 255, 255, 0.07);
-    --text-primary: #f3f4f6;
-    --text-secondary: #9ca3af;
-    --text-muted: #6b7280;
-    --accent: #38bdf8;
-    --accent-glow: rgba(56, 189, 248, 0.15);
-    --accent-steel: #7dd3fc;
-    --nav-bg: rgba(10, 11, 13, 0.88);
-    --refract-from: rgba(56, 189, 248, 0.45);
-    --refract-to: rgba(255, 255, 255, 0.03);
+    /* Dark Theme (Warm Near-Black) */
+    --bg-primary: #0C0C0E;
+    --bg-surface: #141416;
+    --bg-surface-elevated: #1B1B1E;
+    --bg-card: rgba(20, 20, 22, 0.78);
+    --bg-alt: #08080A;
+    --border-crystal: rgba(255, 255, 255, 0.08);
+    --border-crystal-highlight: rgba(255, 255, 255, 0.18);
+    --border-line: rgba(255, 255, 255, 0.08);
+    --text-primary: #F2EFEA;
+    --text-secondary: #A19D96;
+    --text-muted: #736F68;
+    --nav-bg: rgba(12, 12, 14, 0.88);
     --grid-line: rgba(255, 255, 255, 0.04);
   }
 
@@ -56,8 +62,8 @@
   }
 
   ::selection {
-    background-color: var(--accent);
-    color: #ffffff;
+    background-color: var(--color-teal);
+    color: #0C0C0E;
   }
 
   html {
@@ -70,33 +76,45 @@
       scroll-behavior: auto;
     }
     *, *::before, *::after {
-      animation-duration: 0.01ms !important;
+      animation-duration: 0.001ms !important;
       animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
+      transition-duration: 0.001ms !important;
     }
   }
 
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    transition: background-color 0.25s ease, color 0.25s ease;
     overflow-x: hidden;
     line-height: 1.6;
-    letter-spacing: -0.01em;
   }
 
+  /* Display Type: Bricolage Grotesque */
+  h1, h2, h3, .font-display {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    letter-spacing: -0.025em;
+  }
+
+  /* Accent Serif Italic */
+  .font-serif-accent {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  /* Monospace only for tags, dates, code */
   code, pre, .font-mono {
-    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
   }
 
-  /* Section scroll margins for sticky nav */
   section {
     scroll-margin-top: 80px;
   }
 }
 
-/* Master full-width container up to 1680px with clamp padding */
+/* Master container */
 .content-container {
   width: 100%;
   max-width: 1680px;
@@ -108,92 +126,77 @@
 
 /* Fluid Typography */
 .fluid-h1 {
-  font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+  font-size: clamp(2.5rem, 6vw, 5rem);
   line-height: 1.05;
-  letter-spacing: -0.03em;
 }
 
 .fluid-h2 {
-  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  font-size: clamp(1.85rem, 3.5vw, 3rem);
   line-height: 1.15;
-  letter-spacing: -0.02em;
 }
 
-.fluid-body {
-  font-size: clamp(1rem, 1.15vw, 1.15rem);
-  line-height: 1.65;
+/* Gradient Text Utilities */
+.text-grad-tricolor {
+  background: var(--grad-tricolor);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
-/* Crystal Aesthetics */
+.text-grad-teal-sky {
+  background: var(--grad-teal-sky);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.text-grad-amber-coral {
+  background: var(--grad-amber-coral);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Crystal Cards */
 .crystal-card {
   background: var(--bg-card);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-crystal);
   box-shadow: 
     inset 1px 1px 0px 0px var(--border-crystal-highlight),
-    0 10px 30px -10px rgba(0, 0, 0, 0.04);
+    0 10px 30px -10px rgba(0, 0, 0, 0.05);
   position: relative;
-  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .crystal-card:hover {
-  border-color: var(--accent);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
   box-shadow: 
     inset 1px 1px 0px 0px var(--border-crystal-highlight),
-    0 16px 36px -12px var(--accent-glow);
-}
-
-.crystal-card:focus-visible, a:focus-visible, button:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-.crystal-facet-photo {
-  clip-path: polygon(
-    0% 0%, 
-    calc(100% - 22px) 0%, 
-    100% 22px, 
-    100% 100%, 
-    22px 100%, 
-    0% calc(100% - 22px)
-  );
-}
-
-.crystal-divider {
-  height: 1px;
-  background: linear-gradient(
-    90deg, 
-    var(--accent) 0%, 
-    var(--refract-from) 35%, 
-    var(--border-line) 80%, 
-    transparent 100%
-  );
-  border: none;
+    0 16px 36px -12px rgba(90, 176, 255, 0.15);
 }
 
 .crystal-pill {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   letter-spacing: 0.02em;
   border: 1px solid var(--border-crystal);
   background: var(--bg-surface);
   color: var(--text-secondary);
   border-radius: 3px;
-  padding: 0.25rem 0.65rem;
+  padding: 0.25rem 0.6rem;
   display: inline-flex;
   align-items: center;
-  transition: border-color 150ms ease, color 150ms ease, transform 150ms ease;
+  transition: border-color 150ms ease, color 150ms ease;
 }
 
 .crystal-pill:hover {
-  border-color: var(--accent);
+  border-color: var(--color-teal);
   color: var(--text-primary);
-  transform: translateY(-1px);
 }
 
-/* Rectangular crisp buttons (2-4px radius) */
+/* Buttons: 2-4px radius, no pills, magnetic sweep */
 .btn-primary {
   background-color: var(--text-primary);
   color: var(--bg-primary);
@@ -203,13 +206,15 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.65rem 1.35rem;
+  padding: 0.65rem 1.4rem;
   border: 1px solid transparent;
-  transition: all 150ms ease;
+  position: relative;
+  overflow: hidden;
+  transition: all 180ms ease;
 }
 
 .btn-primary:hover {
-  opacity: 0.92;
+  opacity: 0.94;
   transform: translateY(-1px);
 }
 
@@ -222,23 +227,87 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.65rem 1.35rem;
+  padding: 0.65rem 1.4rem;
   border: 1px solid var(--border-crystal);
   box-shadow: inset 1px 1px 0px 0px var(--border-crystal-highlight);
-  transition: all 150ms ease;
+  transition: all 180ms ease;
 }
 
 .btn-secondary:hover {
-  border-color: var(--accent);
+  border-color: var(--color-sky);
   transform: translateY(-1px);
 }
 
-/* Background alternation for rhythm */
-.section-alt {
-  background-color: var(--bg-alt);
+/* Portrait Crop: Angled top-right and bottom-left corners */
+.portrait-crop {
+  clip-path: polygon(
+    0% 0%, 
+    calc(100% - 28px) 0%, 
+    100% 28px, 
+    100% 100%, 
+    28px 100%, 
+    0% calc(100% - 28px)
+  );
 }
 
-/* Print Styles for ATS Resume (Strict 2 page A4 layout, Black on White) */
+/* Noise Overlay */
+.grain-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Custom Interactive Cursor (desktop only) */
+@media (pointer: fine) {
+  .custom-cursor-dot {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-teal);
+    border-radius: 50%;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.15s ease, height 0.15s ease, background-color 0.15s ease;
+  }
+
+  .custom-cursor-ring {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    border: 1.5px solid var(--color-sky);
+    border-radius: 50%;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                height 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.2s ease,
+                background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .custom-cursor-ring.cursor-hover {
+    width: 48px;
+    height: 48px;
+    border-color: var(--color-teal);
+    background-color: rgba(61, 214, 195, 0.08);
+  }
+
+  .custom-cursor-ring.cursor-project {
+    width: 64px;
+    height: 64px;
+    border-color: var(--color-amber);
+    background-color: rgba(246, 185, 69, 0.12);
+  }
+}
+
+/* Print Styles for ATS Resume (Strict 2 page A4, Black on White) */
 @media print {
   @page {
     size: A4;
@@ -267,10 +336,6 @@
     box-shadow: none !important;
     border: none !important;
     background: transparent !important;
-  }
-
-  .page-break-after {
-    page-break-after: always;
   }
 
   .page-break-inside-avoid {

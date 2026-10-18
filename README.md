@@ -2,19 +2,20 @@
 
 Personal portfolio and ATS resume web application for **Akshay Pakade**, Senior DevOps Engineer transitioning into **Agentic AI** and **Forward Deployed Engineering (FDE)**.
 
-Built according to the **"Crystal"** design direction: clean, precise, sharp cut-glass aesthetic, dark and white themes with zero load flash, hairline borders, frosted glass surfaces, and restrained steel-blue accents.
+Built with a bespoke human aesthetic featuring multi-colour mixable tokens, self-hosted Bricolage Grotesque, Instrument Serif, DM Sans, interactive 3D tilted project cards with shared-element modal animations, and an exact 2-page A4 ATS resume.
 
 ---
 
 ## 🛠️ Tech Stack
 
 - **Framework**: Vite + React 19 + TypeScript
-- **Styling**: Tailwind CSS v4 + Vanilla CSS Crystal Design Tokens
-- **Typography**: Self-hosted `@fontsource/space-grotesk` and `@fontsource/jetbrains-mono` (zero third-party font requests)
+- **Smooth Scroll**: Lenis
+- **Motion**: Framer Motion (page load reveal, shared-element `layoutId` modal animation, cards stagger)
+- **Styling**: Tailwind CSS v4 + Custom Multi-Colour Design System
+- **Typography**: Self-hosted `@fontsource/bricolage-grotesque`, `@fontsource/instrument-serif`, `@fontsource/dm-sans`, and `@fontsource/jetbrains-mono`
 - **Icons**: Lucide Icons & Crisp Line SVGs (no emojis anywhere)
-- **Motion**: Framer Motion (restrained micro reveals <= 280ms)
 - **Routing**: React Router v7 (`/`, `/resume`, `/privacy`, `/terms`, `*`)
-- **Image Pipeline**: Real headshot processed via Sharp into responsive AVIF, WebP, and JPEG sizes (320, 480, 626px), ultra-light LQIP blur placeholder, and 1200x630 OG image
+- **Image Pipeline**: Real portrait (`public/images/akshay.png`) processed with Sharp into AVIF, WebP, and JPEG, LQIP blurred placeholder, plus 7 project cover art assets at 1600 & 800px width
 - **PDF Engine**: Puppeteer-core via local Chromium/Chrome for static ATS resume builds (strict 2 pages A4)
 
 ---
@@ -48,53 +49,32 @@ npm run build:resume
 ```
 This builds an exact 2-page A4 print layout to [`public/Akshay_Pakade_Resume.pdf`](file:///public/Akshay_Pakade_Resume.pdf).
 
-### 6. Process Real Photos & OG Cards
+### 6. Process Real Photos & Project Covers
 ```bash
 npm run build:images
+node scripts/generate-covers.mjs
 ```
 
 ---
 
-## 💎 Design Direction: "Crystal"
+## 🎨 Design Direction: Multi-Colour "Crystal"
 
-- **Dual Theme System**: Dark mode (near-black graphite `#0A0B0D`) and White mode (cool paper white `#F7F8FA`) with instantaneous theme toggle in nav. Choice is persisted in `localStorage` (`crystal-theme`) with no flash on load.
-- **Single Source of Truth**: All data (bio, focus areas, experiences, projects, skills, education) lives strictly inside [`src/data/profile.ts`](file:///src/data/profile.ts).
-- **Real Profile Photo**: Uses the authentic portrait at `public/images/akshay.png` served via `<picture>` with AVIF/WebP/JPEG variants, high priority loading, LQIP, and faceted crystal crop. No AI-generated portraits.
-- **Inline Flow Diagrams**: Each of the 4 AI projects includes a collapsible SVG architecture flow diagram built directly from components in the description.
-- **ATS Resume (`/resume`)**: 100% theme-independent (black on white) standard single-column format with print CSS optimized for Ctrl+P (exact 2 pages A4).
-
----
-
-## 🚢 Deployment (Vercel / Netlify)
-
-### Deploying to Vercel
-1. Push your code to GitHub/GitLab.
-2. Import project in Vercel.
-3. Framework Preset: **Vite**
-4. Build Command: `npm run build`
-5. Output Directory: `dist`
-6. Add rewrite rule for client-side routing in `vercel.json`:
-```json
-{
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
-}
-```
-
-### Deploying to Netlify
-Create `public/_redirects`:
-```text
-/*    /index.html   200
-```
-Build command: `npm run build`, publish directory: `dist`.
+- **Colour System**: Teal (`#3DD6C3`), Sky (`#5AB0FF`), Amber (`#F6B945`), Coral (`#FF7A66`).
+- **Dark Theme**: Warm near-black (`#0C0C0E`), surface (`#141416`), text (`#F2EFEA`), muted (`#A19D96`).
+- **Light Theme**: Warm paper (`#F6F3EE`), surface (`#FFFFFF`), text (`#151412`).
+- **Typography**: Display in Bricolage Grotesque, italic serif accents in Instrument Serif, body copy in DM Sans, and monospace exclusively for code, dates, and tech tags.
+- **Micro-Interactions**: Custom trailing ring cursor with hover and project triggers, 3D tilt on project cards with glare reflection, and floating syntax-highlighted code cards (`main.tf` and `agent.py`) overlapping the portrait.
+- **Projects Section**: 3-column responsive grid with filter tabs (*All*, *AI*, *Infrastructure*). Clicking any card triggers a shared-element `layoutId` modal with full description, key points, stack, and inline SVG architecture flow diagrams.
+- **Contact Section**: Two-column layout with direct phone and LinkedIn copy buttons, email row (conditional), and message form with honeypot validation and automatic WhatsApp fallback.
 
 ---
 
 ## 📋 Launch Checklist
 
-- [ ] **Email Configuration**: Add real contact email to `socialLinks.email` in [`src/data/profile.ts`](file:///src/data/profile.ts) when ready (left empty by default).
-- [ ] **Public Phone Confirmation**: Confirm phone number `+91 91728 15355` is intended for public display (tel: link + copy button active on site and resume).
+- [ ] **Add Real Email**: Configure `socialLinks.email` in [`src/data/profile.ts`](file:///src/data/profile.ts) when ready (left empty by default).
+- [ ] **Confirm Public Phone**: Confirm phone number `+91 91728 15355` is intended for public display.
+- [ ] **Configure Form Endpoint**: Set `contactEndpoint` in [`src/data/profile.ts`](file:///src/data/profile.ts) (e.g. Formspree / Web3Forms) if desired.
+- [ ] **Confirm WhatsApp Fallback**: `enableWhatsAppFallback` is enabled by default so submissions open a prefilled WhatsApp chat if no endpoint is configured.
 - [ ] **Repository & Live Links**: Add official `repoUrl` and `liveUrl` values in [`src/data/profile.ts`](file:///src/data/profile.ts) when individual project repos/demos become public.
-- [ ] **Contact Form Endpoint**: Set `contactEndpoint` in `src/data/profile.ts` (e.g., Formspree URL) to activate interactive message posting.
 - [ ] **Custom Domain**: Connect your domain and verify canonical link in `index.html`.
-- [ ] **Open Graph Card Verification**: Validate 1200x630 card at `https://akshaypakade.dev/og-image.jpg` using Facebook Sharing Debugger and Twitter Card Validator.
-- [ ] **Print / Download PDF Verification**: Confirm `public/Akshay_Pakade_Resume.pdf` downloads cleanly and prints to exactly 2 pages A4.
+- [ ] **Open Graph Card Verification**: Validate 1200x630 card at `https://akshaypakade.dev/og-image.jpg`.
