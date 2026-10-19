@@ -145,9 +145,10 @@ export const ContactSection: React.FC = () => {
                       type="text"
                       id="contact-name"
                       required
+                      autoComplete="name"
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-xs font-mono rounded-[3px] border border-[var(--border-crystal)] bg-[var(--bg-surface)] text-[var(--text-primary)] focus:outline-none focus:border-[var(--color-sky)] transition-colors"
+                      className="w-full px-3.5 py-2.5 text-base sm:text-xs font-mono rounded-[3px] border border-[var(--border-crystal)] bg-[var(--bg-surface)] text-[var(--text-primary)] focus:outline-none focus:border-[var(--color-sky)] transition-colors min-h-[44px]"
                       placeholder="Jane Doe"
                     />
                   </div>
@@ -160,9 +161,11 @@ export const ContactSection: React.FC = () => {
                       type="email"
                       id="contact-email"
                       required
+                      autoComplete="email"
+                      inputMode="email"
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-xs font-mono rounded-[3px] border border-[var(--border-crystal)] bg-[var(--bg-surface)] text-[var(--text-primary)] focus:outline-none focus:border-[var(--color-sky)] transition-colors"
+                      className="w-full px-3.5 py-2.5 text-base sm:text-xs font-mono rounded-[3px] border border-[var(--border-crystal)] bg-[var(--bg-surface)] text-[var(--text-primary)] focus:outline-none focus:border-[var(--color-sky)] transition-colors min-h-[44px]"
                       placeholder="jane@company.com"
                     />
                   </div>
@@ -178,7 +181,7 @@ export const ContactSection: React.FC = () => {
                     required
                     value={formState.message}
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                    className="w-full px-3.5 py-2.5 text-xs font-mono rounded-[3px] border border-[var(--border-crystal)] bg-[var(--bg-surface)] text-[var(--text-primary)] focus:outline-none focus:border-[var(--color-sky)] transition-colors resize-none"
+                    className="w-full px-3.5 py-2.5 text-base sm:text-xs font-mono rounded-[3px] border border-[var(--border-crystal)] bg-[var(--bg-surface)] text-[var(--text-primary)] focus:outline-none focus:border-[var(--color-sky)] transition-colors resize-none"
                     placeholder="Discussing DevOps, Agentic AI, or FDE opportunities..."
                   />
                 </div>
@@ -187,7 +190,7 @@ export const ContactSection: React.FC = () => {
                   <button
                     type="submit"
                     disabled={formStatus === 'submitting'}
-                    className="btn-primary text-xs font-mono cursor-pointer"
+                    className="btn-primary text-xs font-mono min-h-[44px] cursor-pointer"
                     id="contact-submit-btn"
                   >
                     <span>{formStatus === 'submitting' ? 'Transmitting...' : 'Send Message'}</span>
@@ -246,24 +249,24 @@ export const ContactSection: React.FC = () => {
                 <div className="flex items-center gap-1">
                   <button
                     onClick={() => copyToClipboard(profileData.socialLinks.linkedin, 'linkedin')}
-                    className="p-1.5 text-[var(--text-muted)] hover:text-[var(--color-sky)] transition-colors rounded"
+                    className="w-10 h-10 min-w-[40px] min-h-[40px] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--color-sky)] transition-colors rounded cursor-pointer"
                     title="Copy LinkedIn URL"
                     aria-label="Copy LinkedIn URL"
                   >
                     {copiedKey === 'linkedin' ? (
-                      <Check className="w-3.5 h-3.5 text-emerald-500" />
+                      <Check className="w-4 h-4 text-emerald-500" />
                     ) : (
-                      <Copy className="w-3.5 h-3.5" />
+                      <Copy className="w-4 h-4" />
                     )}
                   </button>
                   <a
                     href={profileData.socialLinks.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-1.5 text-[var(--text-muted)] hover:text-[var(--color-sky)] transition-colors"
+                    className="w-10 h-10 min-w-[40px] min-h-[40px] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--color-sky)] transition-colors cursor-pointer"
                     aria-label="Open LinkedIn"
                   >
-                    <ArrowUpRight className="w-3.5 h-3.5" />
+                    <ArrowUpRight className="w-4 h-4" />
                   </a>
                 </div>
               </div>
@@ -272,7 +275,7 @@ export const ContactSection: React.FC = () => {
               <div className="p-4 rounded-[3px] border border-[var(--border-crystal)] bg-[var(--bg-surface)] hover:border-[var(--color-teal)] transition-all flex items-center justify-between group">
                 <a
                   href={`tel:${profileData.socialLinks.phone.replace(/\s+/g, '')}`}
-                  className="flex items-center gap-3 flex-1"
+                  className="flex items-center gap-3 flex-1 min-h-[44px]"
                 >
                   <div className="p-2 rounded-[3px] bg-[var(--bg-primary)] border border-[var(--border-crystal)] text-[var(--color-teal)] group-hover:scale-105 transition-transform">
                     <Phone className="w-4 h-4" />
@@ -289,7 +292,7 @@ export const ContactSection: React.FC = () => {
 
                 <button
                   onClick={() => copyToClipboard(profileData.socialLinks.phone, 'phone')}
-                  className="p-1.5 text-[var(--text-muted)] hover:text-[var(--color-teal)] transition-colors rounded"
+                  className="w-10 h-10 min-w-[40px] min-h-[40px] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--color-teal)] transition-colors rounded cursor-pointer"
                   title="Copy Phone Number"
                   aria-label="Copy Phone Number"
                 >
@@ -299,7 +302,7 @@ export const ContactSection: React.FC = () => {
                       <span>Copied</span>
                     </span>
                   ) : (
-                    <Copy className="w-3.5 h-3.5" />
+                    <Copy className="w-4 h-4" />
                   )}
                 </button>
               </div>

@@ -36,13 +36,13 @@ export const ProjectsSection: React.FC = () => {
             </p>
           </div>
 
-          {/* Filter Tabs */}
-          <div className="flex items-center gap-2 bg-[var(--bg-surface)] p-1 rounded-[4px] border border-[var(--border-crystal)] self-start md:self-auto">
+          {/* Filter Tabs (Horizontal scroll on mobile without visible scrollbar) */}
+          <div className="flex items-center gap-2 bg-[var(--bg-surface)] p-1 rounded-[4px] border border-[var(--border-crystal)] self-start md:self-auto max-w-full overflow-x-auto no-scrollbar py-1">
             {(['All', 'AI', 'Infrastructure'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveFilter(tab)}
-                className={`px-3.5 py-1.5 text-xs font-mono rounded-[3px] transition-all cursor-pointer ${
+                className={`px-4 py-2 min-h-[44px] text-xs font-mono rounded-[3px] transition-all cursor-pointer shrink-0 flex items-center justify-center ${
                   activeFilter === tab
                     ? 'bg-[var(--text-primary)] text-[var(--bg-primary)] font-semibold shadow-sm'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'

@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/check-integrity.mjs && tsc -b && vite build",
+    "build": "node scripts/check-integrity.mjs && tsc -b && vite build && node scripts/generate-sitemap.mjs && node scripts/prerender.mjs",
     "build:resume": "node scripts/generate-pdf.mjs",
     "build:images": "node scripts/process-images.mjs",
     "check": "node scripts/check-integrity.mjs",
     "lint": "oxlint",
+    "test:e2e": "node scripts/run-e2e.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

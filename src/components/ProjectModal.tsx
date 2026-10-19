@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { ProjectItem } from '../data/profile'
 import { ProjectDiagram } from './ProjectDiagram'
+import { useLenis } from './LenisContext'
 import { X, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react'
 
 interface ProjectModalProps {
@@ -18,10 +19,15 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   onSelectProject,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null)
+  const { stop, start } = useLenis()
 
-  // Keyboard navigation & escape to close
+  // Keyboard navigation, escape to close & Lenis pause
   useEffect(() => {
     if (!project) return
+
+    stop()
+    const originalOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -33,17 +39,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
       }
     }
 
-    // Body scroll lock
-    const originalOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-
     window.addEventListener('keydown', handleKeyDown)
 
     return () => {
       document.body.style.overflow = originalOverflow
+      start()
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [project])
+  }, [project, stop, start])
 
   if (!project) return null
 
@@ -62,7 +65,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   return (
     <AnimatePresence>
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8"
+        className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 md:p-6"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-project-title"
@@ -76,31 +79,31 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           className="fixed inset-0 bg-black/75 backdrop-blur-md cursor-pointer"
         />
 
-        {/* Modal Window with shared layout animation */}
+        {/* Modal Window: Full screen sheet on mobile, rounded container on tablet/desktop */}
         <motion.div
           ref={modalRef}
           layoutId={`project-card-${project.id}`}
-          className="relative w-full max-w-4xl max-h-[90vh] bg-[var(--bg-surface-elevated)] border border-[var(--border-crystal)] rounded-[4px] shadow-2xl overflow-y-auto z-10 flex flex-col focus:outline-none"
+          className="relative w-full max-w-4xl h-full sm:h-auto sm:max-h-[90vh] bg-[var(--bg-surface-elevated)] border-0 sm:border sm:border-[var(--border-crystal)] sm:rounded-[4px] shadow-2xl overflow-y-auto z-10 flex flex-col focus:outline-none"
           tabIndex={-1}
         >
-          {/* Top Bar with Navigation Controls & Close Button */}
-          <div className="sticky top-0 z-20 flex items-center justify-between p-4 bg-[var(--bg-surface-elevated)]/95 backdrop-blur-md border-b border-[var(--border-line)]">
+          {/* Top Bar with Navigation Controls & Close Button (Sticky) */}
+          <div className="sticky top-0 z-30 flex items-center justify-between p-3.5 sm:p-4 bg-[var(--bg-surface-elevated)]/95 backdrop-blur-md border-b border-[var(--border-line)]">
             <div className="flex items-center gap-2">
               <button
                 onClick={handlePrev}
-                className="p-1.5 rounded-[3px] border border-[var(--border-crystal)] hover:border-[var(--color-sky)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+                className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-[3px] border border-[var(--border-crystal)] hover:border-[var(--color-sky)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] flex items-center justify-center transition-colors cursor-pointer"
                 title="Previous project (Arrow Left)"
                 aria-label="Previous project"
               >
-                <ChevronLeft className="w-4 h-4" />
+                <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={handleNext}
-                className="p-1.5 rounded-[3px] border border-[var(--border-crystal)] hover:border-[var(--color-sky)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+                className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-[3px] border border-[var(--border-crystal)] hover:border-[var(--color-sky)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] flex items-center justify-center transition-colors cursor-pointer"
                 title="Next project (Arrow Right)"
                 aria-label="Next project"
               >
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-5 h-5" />
               </button>
               <span className="text-xs font-mono text-[var(--text-muted)] ml-2">
                 {currentIndex + 1} of {allProjects.length}
@@ -109,16 +112,16 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
             <button
               onClick={onClose}
-              className="p-1.5 rounded-[3px] border border-[var(--border-crystal)] hover:border-[var(--color-coral)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+              className="w-10 h-10 min-w-[44px] min-h-[44px] rounded-[3px] border border-[var(--border-crystal)] hover:border-[var(--color-coral)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] flex items-center justify-center transition-colors cursor-pointer"
               title="Close modal (Escape)"
               aria-label="Close project modal"
             >
-              <X className="w-4 h-4" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Modal Body */}
-          <div className="p-6 sm:p-8 space-y-6">
+          <div className="p-4 sm:p-6 md:p-8 space-y-6 flex-1">
             {/* Large Cover Image (16:10) */}
             <div className="relative aspect-[16/10] w-full rounded-[3px] overflow-hidden border border-[var(--border-crystal)] bg-black/40">
               <picture>
@@ -239,6 +242,30 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 )}
               </div>
             )}
+
+            {/* Mobile Bottom Navigation Bar (sm:hidden) */}
+            <div className="flex sm:hidden items-center justify-between gap-3 pt-4 border-t border-[var(--border-line)]">
+              <button
+                onClick={handlePrev}
+                className="btn-secondary flex-1 py-3 text-xs font-mono min-h-[44px]"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span>Prev</span>
+              </button>
+              <button
+                onClick={handleNext}
+                className="btn-secondary flex-1 py-3 text-xs font-mono min-h-[44px]"
+              >
+                <span>Next</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+              <button
+                onClick={onClose}
+                className="btn-primary flex-1 py-3 text-xs font-mono min-h-[44px]"
+              >
+                <span>Close</span>
+              </button>
+            </div>
           </div>
         </motion.div>
       </div>

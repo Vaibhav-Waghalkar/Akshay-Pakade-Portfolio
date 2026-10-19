@@ -1,9 +1,9 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
-import Lenis from 'lenis'
 import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
 import { CustomCursor } from './components/CustomCursor'
+import { LenisProvider } from './components/LenisContext'
+import { ScrollToHashElement } from './components/ScrollToHashElement'
 import { HomePage } from './pages/HomePage'
 import { ResumePage } from './pages/ResumePage'
 import { PrivacyPage } from './pages/PrivacyPage'
@@ -14,39 +14,10 @@ export function App() {
   const location = useLocation()
   const isResume = location.pathname === '/resume'
 
-  // Initialize Lenis Smooth Scroll (disabled on reduced motion)
-  useEffect(() => {
-    if (isResume) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
-    const lenis = new Lenis({
-      duration: 1.1,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-    })
-
-    function raf(time: number) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
-
-    const rafId = requestAnimationFrame(raf)
-
-    return () => {
-      cancelAnimationFrame(rafId)
-      lenis.destroy()
-    }
-  }, [isResume])
-
-  // Scroll to top on route change
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [location.pathname])
-
   return (
-    <div className="flex flex-col min-h-screen grain-overlay">
+    <LenisProvider>
+      <ScrollToHashElement />
+      <div className="flex flex-col min-h-screen grain-overlay">
       {/* Interactive Custom Cursor */}
       {!isResume && <CustomCursor />}
 
@@ -72,6 +43,7 @@ export function App() {
 
       {!isResume && <Footer />}
     </div>
+    </LenisProvider>
   )
 }
 

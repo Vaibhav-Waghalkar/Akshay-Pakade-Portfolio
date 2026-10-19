@@ -1,10 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, Shield } from 'lucide-react'
+import { MetaTags } from '../components/MetaTags'
 
 export const PrivacyPage: React.FC = () => {
   return (
     <div className="min-h-screen py-16 px-4 sm:px-6">
+      <MetaTags
+        title="Privacy Policy | Akshay Pakade"
+        description="Privacy policy for the personal portfolio website of Akshay Pakade."
+        canonicalPath="/privacy"
+        noindex={true}
+      />
       <div className="content-container space-y-8">
         <Link
           to="/"

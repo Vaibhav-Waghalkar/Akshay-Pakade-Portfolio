@@ -3,14 +3,44 @@ import { profileData } from '../data/profile'
 import { Printer, Download, ArrowLeft, Phone } from 'lucide-react'
 import { LinkedInIcon } from '../components/LinkedInIcon'
 import { Link } from 'react-router-dom'
+import { MetaTags } from '../components/MetaTags'
+import { SITE_URL } from '../config/site'
 
 export const ResumePage: React.FC = () => {
   const handlePrint = () => {
     window.print()
   }
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: `${SITE_URL}/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Resume',
+        item: `${SITE_URL}/resume`,
+      },
+    ],
+  }
+
   return (
     <div className="min-h-screen bg-neutral-100 py-8 px-4 sm:px-6 print:p-0 print:bg-white text-black font-sans">
+      <MetaTags
+        title="Resume | Akshay Pakade - Senior DevOps Engineer"
+        description="Comprehensive professional resume of Akshay Pakade: Senior DevOps Engineer at Wipro specializing in Azure, Kubernetes, Terraform, and Agentic AI."
+        canonicalPath="/resume"
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* Top Action Bar (Hidden in print) */}
       <div className="max-w-[210mm] mx-auto mb-6 flex flex-wrap items-center justify-between gap-4 no-print">
         <Link

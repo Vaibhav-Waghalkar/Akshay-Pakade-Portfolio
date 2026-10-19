@@ -1,10 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, Scale } from 'lucide-react'
+import { MetaTags } from '../components/MetaTags'
 
 export const TermsPage: React.FC = () => {
   return (
     <div className="min-h-screen py-16 px-4 sm:px-6">
+      <MetaTags
+        title="Terms of Service | Akshay Pakade"
+        description="Terms of service for the personal portfolio website of Akshay Pakade."
+        canonicalPath="/terms"
+        noindex={true}
+      />
       <div className="content-container space-y-8">
         <Link
           to="/"

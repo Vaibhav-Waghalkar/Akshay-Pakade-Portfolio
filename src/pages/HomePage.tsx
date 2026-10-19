@@ -3,6 +3,7 @@ import { profileData } from '../data/profile'
 import { FloatingCodeCards } from '../components/FloatingCodeCards'
 import { ProjectsSection } from '../components/ProjectsSection'
 import { ContactSection } from '../components/ContactSection'
+import { MetaTags } from '../components/MetaTags'
 import {
   ArrowDown,
   ArrowUpRight,
@@ -69,17 +70,23 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Background soft drifting light fields (3 large blurred colour fields) */}
+      <MetaTags
+        title="Akshay Pakade | Senior DevOps Engineer, Agentic AI and FDE in Pune"
+        description="Senior DevOps Engineer in Pune with 6.5+ years experience moving into Agentic AI, MCP and Forward Deployed Engineering. Wipro engineer building scalable systems."
+        canonicalPath="/"
+        ogType="profile"
+      />
+      {/* Background soft drifting light fields (3 large blurred colour fields, optimized for mobile) */}
       <div
-        className="absolute top-10 left-[-10%] w-[550px] h-[550px] rounded-full bg-[var(--color-teal)] opacity-[0.06] dark:opacity-[0.09] blur-[120px] pointer-events-none"
+        className="absolute top-10 left-[-10%] w-[320px] sm:w-[550px] h-[320px] sm:h-[550px] rounded-full bg-[var(--color-teal)] opacity-[0.06] dark:opacity-[0.09] blur-[60px] sm:blur-[120px] pointer-events-none z-0"
         aria-hidden="true"
       />
       <div
-        className="absolute top-96 right-[-5%] w-[600px] h-[600px] rounded-full bg-[var(--color-sky)] opacity-[0.06] dark:opacity-[0.09] blur-[140px] pointer-events-none"
+        className="absolute top-96 right-[-5%] w-[340px] sm:w-[600px] h-[340px] sm:h-[600px] rounded-full bg-[var(--color-sky)] opacity-[0.06] dark:opacity-[0.09] blur-[70px] sm:blur-[140px] pointer-events-none z-0"
         aria-hidden="true"
       />
       <div
-        className="absolute top-[2000px] left-[20%] w-[500px] h-[500px] rounded-full bg-[var(--color-amber)] opacity-[0.04] dark:opacity-[0.07] blur-[150px] pointer-events-none"
+        className="absolute top-[2000px] left-[20%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-[var(--color-amber)] opacity-[0.04] dark:opacity-[0.07] blur-[75px] sm:blur-[150px] pointer-events-none z-0"
         aria-hidden="true"
       />
 
@@ -91,8 +98,8 @@ export const HomePage: React.FC = () => {
         <div className="content-container relative z-10 w-full my-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             {/* Left Column: 7 cols */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="space-y-4">
+            <div className="lg:col-span-7 space-y-6 flex flex-col">
+              <div className="space-y-4 order-1">
                 {/* Coloured dot + Plain text label */}
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[3px] border border-[var(--border-crystal)] bg-[var(--bg-surface)] text-xs font-mono text-[var(--color-teal)]">
                   <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-teal)]" />
@@ -118,13 +125,52 @@ export const HomePage: React.FC = () => {
                 </div>
               </div>
 
-              <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed max-w-[68ch]">
+              <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed max-w-[68ch] order-2">
                 {profileData.heroStatement}
               </p>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <a href="#projects" className="btn-primary text-xs font-mono">
+              {/* Mobile photo placeholder (order-3 on mobile, hidden on lg where desktop right column shows it) */}
+              <div className="lg:hidden order-3 py-2 flex justify-center">
+                <div className="relative">
+                  <div
+                    className="absolute inset-0 -m-4 rounded-[30px] bg-gradient-to-tr from-[var(--color-teal)]/20 via-[var(--color-sky)]/20 to-[var(--color-coral)]/20 blur-xl pointer-events-none"
+                    aria-hidden="true"
+                  />
+                  <div className="relative z-10 w-64 sm:w-80 aspect-[626/538] overflow-hidden bg-[var(--bg-surface)] portrait-crop border border-white/20 shadow-xl">
+                    <picture>
+                      <source
+                        type="image/avif"
+                        srcSet="/images/akshay-320.avif 320w, /images/akshay-480.avif 480w, /images/akshay-626.avif 626w"
+                        sizes="(max-width: 640px) 256px, 320px"
+                      />
+                      <source
+                        type="image/webp"
+                        srcSet="/images/akshay-320.webp 320w, /images/akshay-480.webp 480w, /images/akshay-626.webp 626w"
+                        sizes="(max-width: 640px) 256px, 320px"
+                      />
+                      <img
+                        src="/images/akshay-626.jpg"
+                        srcSet="/images/akshay-320.jpg 320w, /images/akshay-480.jpg 480w, /images/akshay-626.jpg 626w"
+                        sizes="(max-width: 640px) 256px, 320px"
+                        alt="Akshay Pakade - Senior DevOps Engineer and Agentic AI Specialist"
+                        width={626}
+                        height={538}
+                        fetchPriority="high"
+                        decoding="sync"
+                        className="w-full h-full object-cover object-[50%_35%]"
+                      />
+                    </picture>
+                  </div>
+                  <div className="mt-2 px-1 flex justify-between items-center text-[10px] font-mono text-[var(--text-muted)]">
+                    <span>PUNE DISTRICT, MAHARASHTRA</span>
+                    <span className="text-[var(--color-teal)] font-medium">6.5+ years exp</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons (order-4 on mobile) */}
+              <div className="flex flex-wrap items-center gap-3 pt-2 order-4">
+                <a href="#projects" className="btn-primary text-xs font-mono min-h-[44px]">
                   <span>View Projects</span>
                   <ArrowDown className="w-3.5 h-3.5" />
                 </a>
@@ -132,7 +178,7 @@ export const HomePage: React.FC = () => {
                 <a
                   href="/Akshay_Pakade_Resume.pdf"
                   download="Akshay_Pakade_Resume.pdf"
-                  className="btn-secondary text-xs font-mono"
+                  className="btn-secondary text-xs font-mono min-h-[44px]"
                   id="hero-download-resume"
                 >
                   <Download className="w-3.5 h-3.5 text-[var(--color-sky)]" />
@@ -144,7 +190,7 @@ export const HomePage: React.FC = () => {
                     href={profileData.socialLinks.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[44px] text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
                   >
                     <LinkedInIcon className="w-4 h-4 text-[var(--color-sky)]" />
                     <span>LinkedIn</span>
@@ -153,21 +199,21 @@ export const HomePage: React.FC = () => {
 
                   <button
                     onClick={() => copyToClipboard(profileData.socialLinks.linkedin, 'linkedin-hero')}
-                    className="p-1.5 text-[var(--text-muted)] hover:text-[var(--color-sky)] rounded transition-colors"
+                    className="p-2 min-w-[40px] min-h-[40px] flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--color-sky)] rounded transition-colors cursor-pointer"
                     title="Copy LinkedIn URL"
                     aria-label="Copy LinkedIn URL"
                   >
                     {copiedKey === 'linkedin-hero' ? (
-                      <Check className="w-3.5 h-3.5 text-emerald-500" />
+                      <Check className="w-4 h-4 text-emerald-500" />
                     ) : (
-                      <Copy className="w-3.5 h-3.5" />
+                      <Copy className="w-4 h-4" />
                     )}
                   </button>
                 </div>
               </div>
 
-              {/* Tag Row */}
-              <div className="pt-3 flex flex-wrap items-center gap-2">
+              {/* Tag Row (order-5 on mobile) */}
+              <div className="pt-3 flex flex-wrap items-center gap-2 order-5">
                 <span className="text-xs font-mono text-[var(--text-muted)] mr-1">Focus:</span>
                 {profileData.heroTags.map((tag) => (
                   <span key={tag} className="crystal-pill text-xs">
@@ -177,8 +223,8 @@ export const HomePage: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Column: 5 cols with angled portrait & overlapping floating code cards */}
-            <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            {/* Right Column: 5 cols with angled portrait & overlapping floating code cards (Desktop only, hidden on mobile) */}
+            <div className="hidden lg:flex lg:col-span-5 justify-end">
               <div className="relative">
                 {/* Soft multi-colour glow behind portrait */}
                 <div
