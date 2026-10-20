@@ -590,26 +590,57 @@ export const HomePage: React.FC = () => {
             </h2>
           </div>
 
-          <div className="crystal-card p-6 sm:p-8 rounded-[4px] space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="space-y-1">
-                <div className="text-xs font-mono text-[var(--color-teal)] font-semibold">
-                  UNDERGRADUATE DEGREE
-                </div>
-                <h3 className="text-lg font-display font-bold text-[var(--text-primary)]">
-                  {profileData.education.degree}, {profileData.education.field}
-                </h3>
-                <p className="text-sm text-[var(--text-secondary)]">
-                  {profileData.education.institution}
-                </p>
-              </div>
-            </div>
+          <div className="space-y-4">
+            {profileData.education.entries.map((edu, index) => {
+              const yearsText = [edu.startYear, edu.endYear].filter(Boolean).join(' - ')
+              const gradeText = edu.grade
+                ? edu.gradeScale
+                  ? `${edu.grade}/${edu.gradeScale}`
+                  : edu.grade
+                : null
 
-            <div className="pt-4 border-t border-[var(--border-line)] flex items-start gap-3">
-              <Award className="w-5 h-5 text-[var(--color-amber)] shrink-0 mt-0.5" />
-              <div className="text-xs font-mono text-[var(--text-secondary)] leading-relaxed">
-                <span className="font-semibold text-[var(--text-primary)]">Training: </span>
-                {profileData.education.certificationNote}
+              return (
+                <div key={index} className="crystal-card p-6 sm:p-8 rounded-[4px] space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                    <div className="space-y-1">
+                      <h3 className="text-lg font-display font-bold text-[var(--text-primary)]">
+                        {edu.degree}
+                        {edu.field ? `, ${edu.field}` : ''}
+                      </h3>
+                      {edu.institution && (
+                        <p className="text-sm text-[var(--text-secondary)]">
+                          {edu.institution}
+                        </p>
+                      )}
+                      {edu.board && (
+                        <p className="text-xs text-[var(--text-muted)] font-mono">
+                          Board: {edu.board}
+                        </p>
+                      )}
+                    </div>
+
+                    {gradeText && (
+                      <div className="inline-flex items-center self-start px-2.5 py-1 text-xs font-mono rounded border border-[var(--border-crystal)] bg-[var(--bg-surface)] text-[var(--color-teal)] font-semibold shrink-0">
+                        {gradeText}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-mono text-[var(--text-muted)] pt-2 border-t border-[var(--border-line)]">
+                    {edu.location && <span>{edu.location}</span>}
+                    {yearsText && <span>{yearsText}</span>}
+                  </div>
+                </div>
+              )
+            })}
+
+            <div className="crystal-card p-6 sm:p-8 rounded-[4px]">
+              <div className="flex items-start gap-3">
+                <Award className="w-5 h-5 text-[var(--color-amber)] shrink-0 mt-0.5" />
+                <div className="text-xs font-mono text-[var(--text-secondary)] leading-relaxed">
+                  <span className="font-semibold text-[var(--text-primary)]">Training: </span>
+                  {profileData.education.certificationNote}
+                </div>
               </div>
             </div>
           </div>

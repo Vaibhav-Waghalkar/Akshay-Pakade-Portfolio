@@ -35,6 +35,19 @@ export interface FocusBlock {
   description: string
 }
 
+export interface EducationItem {
+  degree: string
+  field?: string
+  // Optional fields - empty for now; owner can fill in when details are available
+  institution?: string
+  board?: string
+  location?: string
+  startYear?: string
+  endYear?: string
+  grade?: string
+  gradeScale?: string
+}
+
 export interface ProfileData {
   name: string
   titleLine: string
@@ -64,9 +77,7 @@ export interface ProfileData {
   projects: ProjectItem[]
   skills: SkillCategory[]
   education: {
-    degree: string
-    field: string
-    institution: string
+    entries: EducationItem[]
     certificationNote: string
   }
 }
@@ -452,9 +463,42 @@ export const profileData: ProfileData = {
     },
   ],
   education: {
-    degree: 'Bachelor of Engineering (BE)',
-    field: 'Electrical Engineering',
-    institution: 'Rashtrasant Tukadoji Maharaj Nagpur University (RTMNU)',
+    entries: [
+      {
+        degree: 'Bachelor of Engineering (BE)',
+        field: 'Electrical Engineering',
+        institution: 'Rashtrasant Tukadoji Maharaj Nagpur University (RTMNU)',
+        location: 'Nagpur, Maharashtra',
+        // Optional fields left empty for owner to fill in later
+        board: '',
+        startYear: '',
+        endYear: '',
+        grade: 'CGPA 8.5',
+        gradeScale: '',
+      },
+      {
+        degree: 'Diploma in Electronics Engineering',
+        location: 'Amravati, Maharashtra',
+        // Optional fields left empty for owner to fill in later
+        institution: '',
+        board: '',
+        startYear: '',
+        endYear: '',
+        grade: '',
+        gradeScale: '',
+      },
+      {
+        degree: '10th (Secondary School)',
+        location: 'Amravati, Maharashtra',
+        // Optional fields left empty for owner to fill in later
+        institution: '',
+        board: '',
+        startYear: '',
+        endYear: '',
+        grade: '',
+        gradeScale: '',
+      },
+    ],
     certificationNote:
       'AWS Certified Cloud Practitioner Training (listed as training on LinkedIn, do not claim as a passed certification)',
   },

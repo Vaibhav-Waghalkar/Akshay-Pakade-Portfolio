@@ -216,16 +216,38 @@ export const ResumePage: React.FC = () => {
           <h2 className="text-xs font-bold tracking-wider uppercase text-neutral-900 border-b border-neutral-200 pb-1">
             Education & Professional Training
           </h2>
-          <div className="space-y-1 text-xs text-neutral-700">
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-              <span className="font-bold text-black">
-                {profileData.education.degree}, {profileData.education.field}
-              </span>
-              <span className="text-[11px] font-mono text-neutral-600">
-                {profileData.education.institution}
-              </span>
-            </div>
-            <div className="text-[11px] font-mono text-neutral-700">
+          <div className="space-y-1.5 text-xs text-neutral-700">
+            {profileData.education.entries.map((edu, index) => {
+              const yearsText = [edu.startYear, edu.endYear].filter(Boolean).join(' - ')
+              const gradeText = edu.grade
+                ? edu.gradeScale
+                  ? `${edu.grade}/${edu.gradeScale}`
+                  : edu.grade
+                : null
+              const metaItems = [edu.institution, edu.location, yearsText].filter(Boolean)
+
+              return (
+                <div key={index} className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                  <div className="flex flex-wrap items-baseline gap-x-2">
+                    <span className="font-bold text-black">
+                      {edu.degree}
+                      {edu.field ? `, ${edu.field}` : ''}
+                    </span>
+                    {gradeText && (
+                      <span className="text-[11px] font-mono font-semibold text-neutral-800">
+                        [{gradeText}]
+                      </span>
+                    )}
+                  </div>
+                  {metaItems.length > 0 && (
+                    <span className="text-[11px] font-mono text-neutral-600 shrink-0">
+                      {metaItems.join(' • ')}
+                    </span>
+                  )}
+                </div>
+              )
+            })}
+            <div className="text-[11px] font-mono text-neutral-700 pt-0.5">
               <span className="font-semibold text-neutral-900">Training: </span>
               {profileData.education.certificationNote}
             </div>
